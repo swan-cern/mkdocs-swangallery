@@ -3,7 +3,6 @@ from mkdocs.config import config_options
 from mkdocs.structure.files import File
 from bs4 import BeautifulSoup
 from nbconvert import HTMLExporter
-from premailer import transform
 import re, os, copy, tempfile, shutil
 import nbformat
 import zipfile
@@ -25,7 +24,6 @@ class SwanGallery(BasePlugin):
 
     config_scheme = (
         ('notebook_dir', config_options.Type(str, default='notebooks')),
-        ('optimize_css', config_options.Type(bool, default=True)),
         ('open_in_swan_url', config_options.Type(str)),
         ('gallery_url', config_options.Type(str)),
     )
@@ -44,7 +42,6 @@ class SwanGallery(BasePlugin):
 
         self.baseFolder = config['config_file_path'].replace('mkdocs.yml', '')
         self.NotebookDirName = self.config['notebook_dir']
-        self.optimizeCSS = self.config['optimize_css']
         return config
 
     def on_files(self, files, config):
@@ -173,21 +170,10 @@ class SwanGallery(BasePlugin):
             (body, resources) = html_exporter.from_notebook_node(notebook_content)
 
             full_content = "<style>\n"
-            for style in resources['inlining']['css']:
+            for style in resources['inlining']['css'][1:]:
                 full_content += style
             full_content += "</style>\n"
             full_content += body
-
-            if self.optimizeCSS:
-                # Convert all CSS to inline style to avoid messing the template
-                full_content = transform(full_content)
-
-                # And remove everything except the content
-                # Since transform will add extra tags
-                soup = BeautifulSoup(full_content, "lxml")
-                full_content = ""
-                for child in soup.body.children:
-                    full_content += str(child)
 
             # Add a special marker in this tag to be able to identify in the next stage
             full_content += "<div id='rendered_gallery_notebook'></div>"

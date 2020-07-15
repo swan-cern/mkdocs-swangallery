@@ -29,7 +29,6 @@ setup(
         'mkdocs',
         'nbconvert',
         'nbformat',
-        'premailer',
         'bs4'
         ],
     entry_points={
