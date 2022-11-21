@@ -30,6 +30,7 @@ setup(
         'nbconvert==5.*',
         'jinja2==2.*',
         'markupsafe==1.*',
+        'ipython_genutils',
         'nbformat',
         'bs4'
         ],
