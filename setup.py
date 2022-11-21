@@ -6,7 +6,7 @@ with open("README.md", encoding = "utf-8") as data:
 
 setup(
     name="mkdocs-swangallery",
-    version='0.0.3',
+    version='0.0.4',
     url='https://github.com/swan-cern/mkdocs-swangallery',
     license='BSD',
     description='Plugin for MkDocs to genereate a SWAN Gallery',
