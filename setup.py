@@ -28,6 +28,8 @@ setup(
     install_requires=[
         'mkdocs',
         'nbconvert==5.*',
+        'jinja2==2.*',
+        'markupsafe==1.*',
         'nbformat',
         'bs4'
         ],
