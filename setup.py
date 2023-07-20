@@ -27,9 +27,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'mkdocs',
-        'nbconvert==5.*',
-        'jinja2==2.*',
-        'markupsafe==1.*',
+        'nbconvert>=7.*',
         'ipython_genutils',
         'nbformat',
         'bs4'
