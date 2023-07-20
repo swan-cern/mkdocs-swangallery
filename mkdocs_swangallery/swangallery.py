@@ -164,13 +164,12 @@ class SwanGallery(BasePlugin):
             raw_content = nb.read()
             notebook_content = nbformat.reads(raw_content, as_version=4)
 
-            html_exporter = HTMLExporter()
-            html_exporter.template_file = 'basic'
+            html_exporter = HTMLExporter(template_name='basic')
 
             (body, resources) = html_exporter.from_notebook_node(notebook_content)
 
             full_content = "<style>\n"
-            for style in resources['inlining']['css'][1:]:
+            for style in resources['inlining']['css']:
                 full_content += style
             full_content += "</style>\n"
             full_content += body
