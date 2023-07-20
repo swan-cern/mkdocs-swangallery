@@ -187,6 +187,7 @@ class SwanGallery(BasePlugin):
                 output.write("template: notebook.html\n")
                 output.write("notebook_name: %s\n" % notebook)
                 output.write("notebook_url: %s\n" % path)
+                output.write("hide:\n  - navigation\n  - toc\n")
                 output.write("---\n")
                 output.write(full_content)
 
